@@ -1,6 +1,7 @@
 {
     "name": "pushparaj/color-space-converter",
     "description": "Color spaces converter for PHP, composer install problem so this pacakage submitted",
+        "version": "1.0.0",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -9,9 +10,7 @@
             "email": "benjamin.delespierre@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "require": {},
+   
     "autoload": {
         "psr-0": { "ColorConverter": "src/" }
     }
