@@ -10,6 +10,8 @@
             "email": "benjamin.delespierre@gmail.com"
         }
     ],
+    "minimum-stability": "dev",
+    "require": {},
    
     "autoload": {
         "psr-0": { "ColorConverter": "src/" }
