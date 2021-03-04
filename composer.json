@@ -1,6 +1,6 @@
 {
-    "name": "pushparaj/color-converter",
-    "description": "Color spaces converter for PHP",
+    "name": "pushparaj/color-space-converter",
+    "description": "Color spaces converter for PHP, composer install problem so this pacakage submitted",
     "type": "library",
     "license": "MIT",
     "authors": [
