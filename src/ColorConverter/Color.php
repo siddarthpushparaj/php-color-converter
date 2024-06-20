@@ -101,7 +101,7 @@ class Color implements ArrayAccess, JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         $space = $this->space;
         return array_combine($space::getLabels(), $this->values);
@@ -112,7 +112,7 @@ class Color implements ArrayAccess, JsonSerializable
      *
      * @return Color
      */
-    public function to($newSpace)
+    public function to($newSpace): Color
     {
         if ($newSpace == $this->space) {
             return $this;
@@ -126,18 +126,18 @@ class Color implements ArrayAccess, JsonSerializable
     }
 
     /**
-     * Calculates the euclidian distance between current color and another color
+     * Calculates the euclidean distance between current color and another color
      *
      * @param  Color $other
      *
      * @return float
      */
-    public function delatE(self $other)
+    public function delatE(self $other): float
     {
-        list($L1,$a1,$b1) = $this->to(Space\CIELab::class)->values;
-        list($L2,$a2,$b2) = $other->to(Space\CIELab::class)->values;
+        list($L1, $a1, $b1) = $this->to(Space\CIELab::class)->values;
+        list($L2, $a2, $b2) = $other->to(Space\CIELab::class)->values;
 
-        // euclidian distance between Lab1 & Lab2 colors
+        // euclidean distance between Lab1 & Lab2 colors
         return sqrt(
             ($L2 - $L1) * ($L2 - $L1) +
             ($a2 - $a1) * ($a2 - $a1) +
@@ -148,7 +148,7 @@ class Color implements ArrayAccess, JsonSerializable
     /**
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return $this->values;
     }
@@ -156,7 +156,7 @@ class Color implements ArrayAccess, JsonSerializable
     /**
      * @return string
      */
-    public function getSpace()
+    public function getSpace(): string
     {
         return $this->space;
     }
@@ -166,7 +166,8 @@ class Color implements ArrayAccess, JsonSerializable
      *
      * @return bool
      */
-    public function offsetExists($offset)
+    #[\ReturnTypeWillChange]
+    public function offsetExists($offset): bool
     {
         return isset($this->values[$offset]);
     }
@@ -174,8 +175,9 @@ class Color implements ArrayAccess, JsonSerializable
     /**
      * @param int $offset
      *
-     * @return bool
+     * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         if (!isset($this->values[$offset])) {
@@ -191,7 +193,8 @@ class Color implements ArrayAccess, JsonSerializable
      *
      * @return void
      */
-    public function offsetSet($offset, $value)
+    #[\ReturnTypeWillChange]
+    public function offsetSet($offset, $value): void
     {
         if (!isset($this->values[$offset])) {
             throw new OutOfRangeException("illegal offset: $offset");
@@ -203,7 +206,8 @@ class Color implements ArrayAccess, JsonSerializable
     /**
      * @throws LogicException always
      */
-    public function offsetUnset($offset)
+    #[\ReturnTypeWillChange]
+    public function offsetUnset($offset): void
     {
         throw new LogicException("cannot unset a color offset");
     }
