@@ -206,4 +206,13 @@ class RGB extends AbstractSpace
         $color = CMY::toCMYK($color);
         return $color;
     }
+      public static function toGrayscale($values)
+    {
+        list($R, $G, $B) = $values;
+        
+        // Formula for converting RGB to Grayscale
+        $gray = round(0.299 * $R + 0.587 * $G + 0.114 * $B);
+
+        return [$gray, $gray, $gray];
+    }
 }
