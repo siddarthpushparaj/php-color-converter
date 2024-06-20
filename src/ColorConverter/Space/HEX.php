@@ -47,8 +47,8 @@ class HEX extends AbstractSpace
             return false;
         }
 
-        return hexdec($values[0]) >= 0
-            && hexdec($values[0]) <= 0xFFFFFF;
+        return hexdec(ltrim($values[0], '#')) >= 0
+            && hexdec(ltrim($values[0], '#')) <= 0xFFFFFF;
     }
 
     public static function toRGB($values)
@@ -61,12 +61,14 @@ class HEX extends AbstractSpace
         }
 
         // Transform the HEX value (if needed)
-        $HEX[0] == '#' && $HEX = substr($HEX, 1);
-        strlen($HEX) == 3 && $HEX = "{$HEX[0]}{$HEX[0]}{$HEX[1]}{$HEX[1]}{$HEX[2]}{$HEX[2]}";
+        $HEX = ltrim($HEX, '#');
+        if (strlen($HEX) == 3) {
+            $HEX = "{$HEX[0]}{$HEX[0]}{$HEX[1]}{$HEX[1]}{$HEX[2]}{$HEX[2]}";
+        }
 
-        $R = (int)hexdec("{$HEX[0]}{$HEX[1]}");
-        $G = (int)hexdec("{$HEX[2]}{$HEX[3]}");
-        $B = (int)hexdec("{$HEX[4]}{$HEX[5]}");
+        $R = (int)hexdec(substr($HEX, 0, 2));
+        $G = (int)hexdec(substr($HEX, 2, 2));
+        $B = (int)hexdec(substr($HEX, 4, 2));
 
         return [$R, $G, $B];
     }
