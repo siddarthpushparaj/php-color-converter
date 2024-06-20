@@ -61,18 +61,21 @@ class CIELab extends AbstractSpace
 
     public static function toCIELch($values)
     {
-        list($CIEL,$CIEa,$CIEb) = $values;
+        list($CIEL, $CIEa, $CIEb) = $values;
 
-        $var_H = atan( $CIEb, $CIEa );  //Quadrant by signs
+        // Correct the function call to atan2
+        $var_H = atan2($CIEb, $CIEa);  // Quadrant by signs
 
-        if ( $var_H > 0 ) $var_H = ( $var_H / pi() ) * 180;
-        else              $var_H = 360 - ( abs( $var_H ) / pi() ) * 180;
+        if ($var_H > 0) {
+            $var_H = ($var_H / pi()) * 180;
+        } else {
+            $var_H = 360 - (abs($var_H) / pi()) * 180;
+        }
 
-        $CIEL = $CIEL;
-        $CIEC = sqrt( pow($CIEa , 2) + pow($CIEb, 2 ) );
+        $CIEC = sqrt(pow($CIEa, 2) + pow($CIEb, 2));
         $CIEH = $var_H;
 
-        return [$CIEL,$CIEC,$CIEH];
+        return [$CIEL, $CIEC, $CIEH];
     }
 
     public static function toHEX($values)
