@@ -29,7 +29,7 @@ class HEX extends AbstractSpace
 {
     public static function getSpaceBoundaries()
     {
-        return [['#000000'],['#FFFFFF']];
+        return [['#000000'], ['#FFFFFF']];
     }
 
     public static function getLabels()
@@ -55,15 +55,20 @@ class HEX extends AbstractSpace
     {
         list($HEX) = $values;
 
-        // transform the HEX value (if neeed)
-        $HEX[0]     == '#' && $HEX = substr($HEX, 1);
-        strlen($HEX) == 3  && $HEX = "{$HEX[0]}{$HEX[0]}{$HEX[1]}{$HEX[1]}{$HEX[2]}{$HEX[2]}";
+        // Validate HEX value
+        if (!self::validate([$HEX])) {
+            throw new \InvalidArgumentException("Invalid HEX color value: $HEX");
+        }
+
+        // Transform the HEX value (if needed)
+        $HEX[0] == '#' && $HEX = substr($HEX, 1);
+        strlen($HEX) == 3 && $HEX = "{$HEX[0]}{$HEX[0]}{$HEX[1]}{$HEX[1]}{$HEX[2]}{$HEX[2]}";
 
         $R = (int)hexdec("{$HEX[0]}{$HEX[1]}");
         $G = (int)hexdec("{$HEX[2]}{$HEX[3]}");
         $B = (int)hexdec("{$HEX[4]}{$HEX[5]}");
 
-        return [$R,$G,$B];
+        return [$R, $G, $B];
     }
 
     public static function toXYZ($values)
